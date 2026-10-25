@@ -1,0 +1,168 @@
+{
+  "$description": "ShopBase 2.0 Home (P01) primitive tokens. Raw values only, neutral names. Source: 06-proof-ui/proof.html :root (Gate 6 APPROVED) and 03-research/16-palette.md (Option 1 LOCKED + Amendment). Light mode only. Dimension values are strings with a unit (older DTCG draft form). NON-STANDARD uses, kept on purpose so the values equal the proof: the angle (135deg) is typed dimension, the grid templates are typed string (not a DTCG type), letter spacing is in em (DTCG dimension allows px and rem only), and shadow offsetX/spread are written as unitless 0 as in the proof. Unitless ratios use number, which is standard.",
+  "color": {
+    "$type": "color",
+    "white": { "$value": "#FFFFFF", "$description": "Page and card white." },
+    "blue": {
+      "50":  { "$value": "#EDF2FC", "$description": "Field F1 stop 2 (white + 10% logo blue)." },
+      "100": { "$value": "#D9E4F9", "$description": "Field F2 stop 2 (hand-rounded, per 16-palette Amendment)." },
+      "300": { "$value": "#A4BDEF", "$description": "Field F3 stop 2 (white + 50% logo blue)." },
+      "600": { "$value": "#4371CD", "$description": "Logo blue scaled to 92% brightness, hue 220. White on it is 4.69:1." },
+      "700": { "$value": "#3A62B2", "$description": "Darker step of the same hue." },
+      "800": { "$value": "#1E4A9E", "$description": "Deepest blue step." }
+    },
+    "sky": {
+      "50":  { "$value": "#F3FAFE", "$description": "Field F1 stop 1 (white + 10% logo sky)." },
+      "100": { "$value": "#E7F3FD", "$description": "Lightest sky tint." },
+      "200": { "$value": "#D1EBFB", "$description": "Field F2 stop 1 (white + 40% logo sky)." },
+      "300": { "$value": "#C5E6FA", "$description": "Field F3 stop 1 (white + 50% logo sky)." },
+      "400": { "$value": "#8BCDF6", "$description": "The logo's sky colour." }
+    },
+    "neutral": {
+      "50":  { "$value": "#F4F7FC", "$description": "Lightest cool grey." },
+      "200": { "$value": "#DDE3EE", "$description": "Light cool grey." },
+      "500": { "$value": "#7F8A9E", "$description": "Mid cool grey, 3.48:1 on white." },
+      "600": { "$value": "#66718A", "$description": "Darker mid cool grey, between 500 and 700 in lightness." },
+      "700": { "$value": "#596070", "$description": "Dark cool grey, 6.30:1 on white." },
+      "800": { "$value": "#373B43", "$description": "Near-black, same as the dark logo wordmark." },
+      "900": { "$value": "#1E222B", "$description": "Cool near-black." }
+    },
+    "green": {
+      "50":  { "$value": "#E6F4EC" },
+      "700": { "$value": "#1B7A47", "$description": "Thin margin on its tint (4.72:1): do not lighten either." }
+    },
+    "amber": {
+      "50":  { "$value": "#FFF3D6" },
+      "700": { "$value": "#8A5300" }
+    },
+    "red": {
+      "50":  { "$value": "#FDECEA" },
+      "700": { "$value": "#B3261E" }
+    }
+  },
+  "font": {
+    "family": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": ["Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
+        "$description": "Inter first, then the proof's fallback stack. Inter file: 02-assets/fonts/InterVariable.woff2 (weights 100 to 900)."
+      }
+    },
+    "ratio": {
+      "$type": "number",
+      "scale": { "$value": 1.25, "$description": "Type scale ratio from 1rem; one step down (1/1.25 = 0.8rem) for captions." }
+    },
+    "size": {
+      "$type": "dimension",
+      "n1": { "$value": "0.8rem",    "$description": "Step -1 (12.8px)." },
+      "0":  { "$value": "1rem",      "$description": "Step 0, the base (16px)." },
+      "1":  { "$value": "1.25rem",   "$description": "Step 1 (20px)." },
+      "2":  { "$value": "1.5625rem", "$description": "Step 2 (25px)." },
+      "3":  { "$value": "1.953rem",  "$description": "Step 3 (31.2px)." },
+      "4":  { "$value": "2.441rem",  "$description": "Step 4 (39.1px)." },
+      "5":  { "$value": "3.052rem",  "$description": "Step 5 (48.8px)." }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular":  { "$value": 400 },
+      "medium":   { "$value": 500 },
+      "semibold": { "$value": 600 }
+    },
+    "line-height": {
+      "$type": "number",
+      "tight":   { "$value": 1.1 },
+      "snug":    { "$value": 1.2 },
+      "relaxed": { "$value": 1.55 }
+    },
+    "letter-spacing": {
+      "$type": "dimension",
+      "tight": { "$value": "-0.02em" },
+      "wide":  { "$value": "0.04em" }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "$description": "Spacing scale, ratio about 1.6 from 4px; the top step (7) is the section gap in the proof.",
+    "1": { "$value": "0.25rem" },
+    "2": { "$value": "0.5rem" },
+    "3": { "$value": "1rem" },
+    "4": { "$value": "1.5rem" },
+    "5": { "$value": "2.5rem" },
+    "6": { "$value": "4rem" },
+    "7": { "$value": "6rem" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "$description": "Named by pixel value at 16px root.",
+    "12":  { "$value": "0.75rem" },
+    "16":  { "$value": "1rem" },
+    "24":  { "$value": "1.5rem" },
+    "32":  { "$value": "2rem" },
+    "992": { "$value": "62rem", "$description": "Pill: larger than any element height." }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "soft": {
+      "$value": { "color": "rgba(30, 34, 43, 0.10)", "offsetX": "0", "offsetY": "0.5rem", "blur": "2rem", "spread": "0" },
+      "$description": "Soft card shadow (white card on a field). Colour is #1E222B (neutral.900) at 10%."
+    },
+    "lifted": {
+      "$value": { "color": "rgba(30, 34, 43, 0.16)", "offsetX": "0", "offsetY": "0.75rem", "blur": "2.5rem", "spread": "0" },
+      "$description": "Device wrapper shadow (proof wrapper). Colour is #1E222B (neutral.900) at 16%."
+    }
+  },
+  "border": {
+    "width": {
+      "$type": "dimension",
+      "1": { "$value": "1px" },
+      "2": { "$value": "2px" }
+    }
+  },
+  "outline": {
+    "$type": "dimension",
+    "width":  { "$value": "2px", "$description": "Focus ring width." },
+    "offset": { "$value": "2px", "$description": "Focus ring offset." }
+  },
+  "angle": {
+    "$type": "dimension",
+    "135": { "$value": "135deg", "$description": "Field gradient angle. DTCG has no angle type; dimension used." }
+  },
+  "size": {
+    "$type": "dimension",
+    "$description": "Layout sizes, named by pixel value at 16px root.",
+    "20":   { "$value": "1.25rem", "$description": "Icon size." },
+    "52":   { "$value": "3.25rem", "$description": "Control height." },
+    "120":  { "$value": "7.5rem",  "$description": "Logo width in the proof legend; equals the 120px minimum full-logo width proposed in 04-brand/10-identity.md." },
+    "240":  { "$value": "15rem" },
+    "288":  { "$value": "18rem" },
+    "608":  { "$value": "38rem" },
+    "736":  { "$value": "46rem" },
+    "864":  { "$value": "54rem" },
+    "1088": { "$value": "68rem" },
+    "1200": { "$value": "75rem" },
+    "1280": { "$value": "80rem" },
+    "1440": { "$value": "90rem" }
+  },
+  "ratio": {
+    "$type": "number",
+    "0945": { "$value": 0.0945, "$description": "Named by value (0.0945 = 24 / 254). Used for the logo clear space: proof calc(logo-w * 0.0945); 04-brand/10-identity.md: 24 / 254 = 0.0945." }
+  },
+  "grid": {
+    "$type": "string",
+    "columns": {
+      "5-7": { "$value": "5fr 7fr", "$description": "Text column then visual column. Not a DTCG type." },
+      "7-5": { "$value": "7fr 5fr", "$description": "Visual column then text column (reverse rows)." }
+    }
+  },
+  "breakpoint": {
+    "$type": "dimension",
+    "$description": "Values from the proof's media queries (not :root variables).",
+    "767":  { "$value": "767px",  "$description": "Mobile rules apply at max-width 767px." },
+    "1439": { "$value": "1439px", "$description": "Compact desktop rules apply at max-width 1439px." },
+    "1440": { "$value": "1440px", "$description": "Wide rules apply at min-width 1440px." }
+  },
+  "viewport": {
+    "$type": "dimension",
+    "375": { "$value": "375px", "$description": "Mobile design width used by the proof (not a media query)." }
+  }
+}

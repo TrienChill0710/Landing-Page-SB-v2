@@ -1,0 +1,3 @@
+Lucide
+Licence: ISC (MIT for the icons derived from Feather). Commercial use allowed. Source: https://github.com/lucide-icons/lucide
+Chosen by default at Step 10 (identity proposal, approved at Gate 3). The user supplied no icon set. Change this file if you have ShopBase's own icon set.

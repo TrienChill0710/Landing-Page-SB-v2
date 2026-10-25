@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopBase 2.0 proof sections</title>
+<style>
+@font-face {
+  font-family: "Inter";
+  src: url("../02-assets/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Colour roles (locked palette, Option 1) */
+  --color-primary: #4371CD;
+  --color-primary-hover: #3A62B2;
+  --color-on-primary: #FFFFFF;
+  --color-accent-tint: #E7F3FD;
+  --color-page: #FFFFFF;
+  --color-panel: #F4F7FC;
+  --color-title: #1E222B;
+  --color-body: #373B43;
+  --color-muted: #596070;
+  --color-border: #7F8A9E;
+  --color-border-field: #66718A;
+  --color-divider: #DDE3EE;
+  --color-link: #3A62B2;
+  --color-focus: #1E4A9E;
+  --color-canvas: var(--color-divider);
+  --color-bar: var(--color-divider);
+
+  /* Soft fields (Amendment): two stops each */
+  --field-1-a: #F3FAFE;
+  --field-1-b: #EDF2FC;
+  --field-2-a: #D1EBFB;
+  --field-2-b: #D9E4F9;
+  --field-3-a: #C5E6FA;
+  --field-3-b: #A4BDEF;
+  --field-angle: 135deg;
+
+  /* Shadows (outer wrapper and white cards on a field) */
+  --shadow-card: 0 0.5rem 2rem rgba(30, 34, 43, 0.10);
+  --shadow-device: 0 0.75rem 2.5rem rgba(30, 34, 43, 0.16);
+
+  /* Type scale: ratio 1.25 from 1rem, one step down for captions */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fs-n1: 0.8rem;
+  --fs-0: 1rem;
+  --fs-1: 1.25rem;
+  --fs-2: 1.5625rem;
+  --fs-3: 1.953rem;
+  --fs-4: 2.441rem;
+  --fs-5: 3.052rem;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --lh-tight: 1.1;
+  --lh-heading: 1.2;
+  --lh-body: 1.55;
+  --ls-tight: -0.02em;
+  --ls-label: 0.04em;
+
+  /* Role sizes (point at the scale; media queries re-point them) */
+  --size-hero: var(--fs-5);
+  --size-h2: var(--fs-4);
+  --size-lead: var(--fs-1);
+  --size-body: var(--fs-0);
+  --size-caption: var(--fs-n1);
+
+  /* Spacing scale (ratio about 1.6 from 4px; the top step is the section gap) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+  --section-gap: var(--space-7);
+  --gutter: var(--space-5);
+  --field-pad: var(--space-6);
+
+  /* Sizes */
+  --container: 75rem;
+  --legend-col: 14rem;
+  --frame-max: 90rem;
+  --text-measure: 38rem;
+  --hero-text-measure: 54rem;
+  --card-min-h: 18rem;
+  --card-max-w: 46rem;
+  --control-h: 3.25rem;
+  --icon: 1.25rem;
+  --bar-h: 0.75rem;
+  --bar-short: 40%;
+  --bar-mid: 70%;
+  --bar-long: 100%;
+  --split-cols: 5fr 7fr;
+  --split-cols-reverse: 7fr 5fr;
+  --line: 1px;
+  --line-dashed: 2px;
+  --focus-w: 2px;
+  --focus-offset: 2px;
+  --logo-w: 7.5rem;
+  --logo-clear: calc(var(--logo-w) * 0.0945);
+
+  /* Radius family: container > card > inner card > control */
+  --radius-field: 2rem;
+  --radius-card: 1.5rem;
+  --radius-inner: 1rem;
+  --radius-control: 0.75rem;
+  --radius-pill: 62rem;
+  --radius-bar: 0.375rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  font-size: var(--size-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-regular);
+}
+
+h1, h2, h3, p, figure, dl, dd, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+
+a { color: var(--color-link); }
+a:focus-visible, summary:focus-visible {
+  outline: var(--focus-w) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+/* ------------------------------------------------------------------ */
+/* Proof chrome: canvas, intro, legends (all OUTSIDE the section frames) */
+/* ------------------------------------------------------------------ */
+.canvas {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-6);
+}
+
+.legend-card {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  background: var(--color-page);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.proof-intro-wrap { padding-inline: var(--gutter); }
+.proof-title { font-size: var(--fs-3); line-height: var(--lh-heading); letter-spacing: var(--ls-tight); font-weight: var(--fw-semibold); color: var(--color-title); }
+.proof-copy { max-width: var(--hero-text-measure); }
+.proof-copy + .proof-copy { margin-top: var(--space-2); }
+.logo-legend {
+  display: inline-block;
+  padding: var(--logo-clear);
+  border: var(--line) solid var(--color-divider);
+  border-radius: var(--radius-control);
+  justify-self: start;
+}
+.logo-legend img { width: var(--logo-w); height: auto; }
+.logo-legend-note { font-size: var(--size-caption); color: var(--color-muted); }
+
+.frame-index { display: grid; gap: var(--space-2); font-size: var(--size-body); }
+.frame-index li { display: flex; gap: var(--space-3); }
+.frame-index strong { color: var(--color-title); font-weight: var(--fw-semibold); min-width: var(--legend-col); }
+
+.frame-block { display: grid; gap: var(--space-4); }
+.frame-legend { width: 100%; max-width: calc(var(--container) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+.frame-label { font-size: var(--fs-1); font-weight: var(--fw-semibold); color: var(--color-title); line-height: var(--lh-heading); }
+.frame-meta { font-size: var(--size-caption); color: var(--color-body); letter-spacing: var(--ls-label); }
+
+/* Outer wrapper: shadow and canvas only, never inside a frame */
+.frame-device {
+  width: 100%;
+  margin-inline: auto;
+  max-width: var(--frame-max);
+  box-shadow: var(--shadow-device);
+  background: var(--color-page);
+}
+
+/* ------------------------------------------------------------------ */
+/* Section frame (what the real page will be)                          */
+/* ------------------------------------------------------------------ */
+.frame {
+  background: var(--color-page);
+  color: var(--color-body);
+  padding-block: var(--section-gap);
+  padding-inline: var(--gutter);
+}
+.frame-inner { max-width: var(--container); margin-inline: auto; }
+
+.title-hero {
+  font-size: var(--size-hero);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--color-title);
+}
+.title-section {
+  font-size: var(--size-h2);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--color-title);
+}
+.text-lead { font-size: var(--size-lead); line-height: var(--lh-body); color: var(--color-body); }
+.text-body { font-size: var(--size-lead); line-height: var(--lh-body); color: var(--color-body); }
+.text-caption { font-size: var(--size-caption); line-height: var(--lh-body); color: var(--color-muted); font-weight: var(--fw-medium); letter-spacing: var(--ls-label); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-h);
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-control);
+  font: inherit;
+  font-size: var(--size-body);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  text-decoration: none;
+  border: var(--line) solid transparent;
+}
+.btn:focus-visible { outline: var(--focus-w) solid var(--color-focus); outline-offset: var(--focus-offset); }
+.btn-primary { background: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary); }
+.btn-primary:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
+.btn-secondary { background: var(--color-page); color: var(--color-title); border-color: var(--color-border); }
+.btn-secondary:hover { background: var(--color-panel); }
+.icon { display: inline-flex; color: inherit; }
+.icon svg { width: var(--icon); height: var(--icon); }
+
+/* Hero: centred stack, then one card on one field */
+.hero-stack { display: grid; justify-items: center; text-align: center; gap: var(--space-4); }
+.hero-stack .title-hero { max-width: var(--hero-text-measure); }
+.hero-stack .text-lead { max-width: var(--text-measure); }
+.button-row { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-2); }
+.hero-visual { margin-top: var(--space-6); }
+
+/* Soft colour fields */
+.field {
+  width: 100%;
+  border-radius: var(--radius-field);
+  padding: var(--field-pad);
+  display: grid;
+  place-items: center;
+}
+.field-1 { background: linear-gradient(var(--field-angle), var(--field-1-a), var(--field-1-b)); }
+.field-2 { background: linear-gradient(var(--field-angle), var(--field-2-a), var(--field-2-b)); }
+.field-3 { background: linear-gradient(var(--field-angle), var(--field-3-a), var(--field-3-b)); }
+
+/* Cards (on a field: white, no border, soft shadow) */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: var(--card-max-w);
+  background: var(--color-page);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  min-height: var(--card-min-h);
+}
+.card-small { min-height: 0; }
+.card-inner {
+  background: var(--color-accent-tint);
+  border-radius: var(--radius-inner);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+  box-shadow: none;
+  min-height: 0;
+}
+
+/* "Illustration" label: solid pill, on the white card, never on a field */
+.pill {
+  justify-self: start;
+  background: var(--color-panel);
+  color: var(--color-body);
+  border: var(--line) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--size-caption);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-label);
+}
+
+/* Neutral placeholder bars */
+.bars { display: grid; gap: var(--space-3); }
+.bar { display: block; height: var(--bar-h); border-radius: var(--radius-bar); background: var(--color-bar); }
+.bar-short { width: var(--bar-short); }
+.bar-mid { width: var(--bar-mid); }
+.bar-long { width: var(--bar-long); }
+.bar-tall { height: var(--space-6); border-radius: var(--radius-inner); }
+.card-inner .bar { background: var(--color-page); }
+
+/* Region reserved for the approve control (part of the future illustration; not live UI) */
+.region {
+  border: var(--line-dashed) dashed var(--color-border-field);
+  border-radius: var(--radius-control);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--size-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--color-body);
+  background: var(--color-page);
+  text-align: center;
+}
+
+/* Split row: text beside a field, alternating sides */
+.split {
+  display: grid;
+  grid-template-columns: var(--split-cols);
+  gap: var(--space-6);
+  align-items: center;
+}
+.split-reverse { grid-template-columns: var(--split-cols-reverse); }
+.split-reverse .split-text { order: 2; }
+.split-reverse .split-visual { order: 1; }
+.split-text { display: grid; gap: var(--space-3); align-content: center; max-width: var(--text-measure); }
+.visual-caption { margin-top: var(--space-3); }
+
+/* Proof-only notes in the frame legends (outside the frames) */
+.frame-supply { font-size: var(--size-caption); color: var(--color-body); margin-top: var(--space-1); }
+.frame-supply strong { color: var(--color-title); font-weight: var(--fw-semibold); }
+
+/* Closing call to action: centred stack on the plain page, no field */
+.closing-stack { display: grid; justify-items: center; text-align: center; gap: var(--space-4); }
+.closing-stack .button-row { margin-top: var(--space-3); }
+
+/* Measured report (outside the frames) */
+.report summary { cursor: pointer; font-size: var(--fs-1); font-weight: var(--fw-semibold); color: var(--color-title); }
+.report-body { display: grid; gap: var(--space-3); margin-top: var(--space-4); font-size: var(--size-body); overflow-wrap: anywhere; }
+.report-table { width: 100%; border-collapse: collapse; font-size: var(--size-caption); }
+.report-table th, .report-table td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: var(--line) solid var(--color-divider); vertical-align: top; color: var(--color-body); }
+.report-table th { color: var(--color-title); font-weight: var(--fw-semibold); }
+.report-scroll { overflow-x: auto; }
+.report-heading { font-size: var(--fs-0); font-weight: var(--fw-semibold); color: var(--color-title); }
+
+@media (max-width: 1439px) {
+  :root { --container: 68rem; --gutter: var(--space-5); }
+}
+
+@media (min-width: 1440px) {
+  :root { --container: 80rem; }
+}
+
+/* Mobile (375) */
+@media (max-width: 767px) {
+  :root {
+    --size-hero: var(--fs-3);
+    --size-h2: var(--fs-2);
+    --size-lead: var(--fs-0);
+    --section-gap: var(--space-6);
+    --gutter: var(--space-4);
+    --field-pad: var(--space-3);
+    --radius-field: var(--radius-card);
+    --radius-card: var(--radius-inner);
+    --card-min-h: 15rem;
+  }
+  .canvas { gap: var(--space-5); padding-block: var(--space-4); }
+  .legend-card { padding: var(--space-4); border-radius: var(--radius-inner); }
+  .frame-index li { flex-direction: column; gap: 0; }
+  .frame-index strong { min-width: 0; }
+  .split, .split-reverse { grid-template-columns: 1fr; gap: var(--space-5); }
+  .split-reverse .split-text, .split-reverse .split-visual { order: 0; }
+  .card { padding: var(--space-4); gap: var(--space-3); }
+  .hero-visual { margin-top: var(--space-5); }
+  .button-row { width: 100%; flex-direction: column; }
+  .button-row .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="canvas">
+
+  <!-- Intro block: outside the section frames -->
+  <div class="proof-intro-wrap">
+    <section class="legend-card" aria-labelledby="proof-heading">
+      <div class="logo-legend"><img src="../02-assets/logo/Logo%20(6).svg" alt="ShopBase logo"></div>
+      <p class="logo-legend-note">Frame legend only: the dark wordmark file, loaded unchanged, with its clear space. The frames below hold no logo because the header is out of scope.</p>
+      <h1 class="proof-title" id="proof-heading">Proof sections · ShopBase 2.0 · Home</h1>
+      <div>
+        <p class="proof-copy">Type C · Rebrand. Variants P01·A and P01·B. Light mode only, desktop and mobile. Key sections K1 to K5, built with the approved default copy, the locked palette, Inter and Lucide. Header and footer are out of scope for this proof.</p>
+        <p class="proof-copy">Every picture is a labelled placeholder: the illustrations are supplied by the user and do not exist yet. Nothing here is a product screenshot or real interface.</p>
+        <p class="proof-copy">Proof only: everything on the grey canvas (this card, the frame legends with their "To supply" notes, and the measured report) is a note for review, not page copy. Only the white frames show the page.</p>
+      </div>
+      <ul class="frame-index">
+        <li><strong>S03 · Hero A</strong><span>P01·A · K1</span></li>
+        <li><strong>S10 · Hero B</strong><span>P01·B · K1</span></li>
+        <li><strong>S05 · Scan</strong><span>P01·A · K2</span></li>
+        <li><strong>S06 · Fix</strong><span>P01·A · K3</span></li>
+        <li><strong>S12 · Scan and fix</strong><span>P01·B · K2 and K3</span></li>
+        <li><strong>S07 · Approve</strong><span>Shared · K4</span></li>
+        <li><strong>S09 · Closing call to action</strong><span>Shared · K5</span></li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- S03 -->
+  <div class="frame-block">
+    <div class="frame-legend">
+      <p class="frame-label">S03 · Hero A</p>
+      <p class="frame-meta">Variant P01·A · key section K1 · field F2 · one primary button and the one secondary button</p>
+      <p class="frame-supply"><strong>Proof only · To supply:</strong> a smaller crop of the scan card, a card listing what the scan found. No number, no real domain.</p>
+    </div>
+    <div class="frame-device">
+      <section class="frame" id="s03" aria-label="S03 · Hero A" data-frame="S03">
+        <div class="frame-inner">
+          <div class="hero-stack">
+            <h2 class="title-hero">AI that finds what stops shoppers on your store and builds the fix.</h2>
+            <p class="text-lead">CR Scan AI finds what stops shoppers and builds a proposed fix. You approve every change.</p>
+            <div class="button-row">
+              <a class="btn btn-primary" href="https://accounts.shopbase.com/sign-up">Get started for free <span class="icon" aria-hidden="true"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg></span></a>
+              <a class="btn btn-secondary" href="#s05">Explore CR Scan AI</a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="field field-2">
+              <figure class="card" role="img" aria-label="Illustration of a scan result: a card listing what the scan found on a store.">
+                <span class="pill">Illustration</span>
+                <span class="bars">
+                  <span class="bar bar-mid"></span>
+                  <span class="bar bar-long"></span>
+                  <span class="bar bar-long"></span>
+                  <span class="bar bar-short"></span>
+                </span>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="frame-block">
+    <div class="frame-legend">
+      <p class="frame-label">S10 · Hero B</p>
+      <p class="frame-meta">Variant P01·B · key section K1 · field F2 · one primary button and the one secondary button</p>
+      <p class="frame-supply"><strong>Proof only · To supply:</strong> one store with the scan card on top of it. No number, no real domain.</p>
+    </div>
+    <div class="frame-device">
+      <section class="frame" id="s10" aria-label="S10 · Hero B" data-frame="S10">
+        <div class="frame-inner">
+          <div class="hero-stack">
+            <h2 class="title-hero">ShopBase 2.0: one store platform, with AI that finds what stops shoppers and builds the fix.</h2>
+            <p class="text-lead">On your store, CR Scan AI finds what stops shoppers and builds a proposed fix. You approve every change.</p>
+            <div class="button-row">
+              <a class="btn btn-primary" href="https://accounts.shopbase.com/sign-up">Get started for free <span class="icon" aria-hidden="true"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg></span></a>
+              <a class="btn btn-secondary" href="#s12">Explore CR Scan AI</a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="field field-2">
+              <figure class="card" role="img" aria-label="Illustration of a store page with a scan card on top of it.">
+                <span class="pill">Illustration</span>
+                <span class="bars">
+                  <span class="bar bar-short"></span>
+                  <span class="bar bar-tall"></span>
+                  <span class="bar bar-mid"></span>
+                </span>
+                <span class="card card-inner card-small">
+                  <span class="bars">
+                    <span class="bar bar-mid"></span>
+                    <span class="bar bar-long"></span>
+                  </span>
+                </span>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- S05 -->
+  <div class="frame-block">
+    <div class="frame-legend">
+      <p class="frame-label">S05 · Scan</p>
+      <p class="frame-meta">Variant P01·A · key section K2 · field F1 · no button</p>
+      <p class="frame-supply"><strong>Proof only · To supply:</strong> the full scan card with generic labels. No number, no store domain.</p>
+    </div>
+    <div class="frame-device">
+      <section class="frame" id="s05" aria-label="S05 · Scan" data-frame="S05">
+        <div class="frame-inner">
+          <div class="split">
+            <div class="split-text">
+              <h2 class="title-section">CR Scan AI shows you what it finds.</h2>
+              <p class="text-body">It scans your store and lists what may be stopping shoppers.</p>
+            </div>
+            <div class="split-visual">
+              <div class="field field-1">
+                <figure class="card" role="img" aria-label="Illustration of a scan result: a card listing what the scan found on a store.">
+                  <span class="pill">Illustration</span>
+                  <span class="bars">
+                    <span class="bar bar-mid"></span>
+                    <span class="bar bar-long"></span>
+                    <span class="bar bar-long"></span>
+                    <span class="bar bar-long"></span>
+                    <span class="bar bar-short"></span>
+                  </span>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- S06 -->
+  <div class="frame-block">
+    <div class="frame-legend">
+      <p class="frame-label">S06 · Fix</p>
+      <p class="frame-meta">Variant P01·A · key section K3 · field F2 · no button</p>
+      <p class="frame-supply"><strong>Proof only · To supply:</strong> one proposed fix on one card. No number; do not show what changes inside the store.</p>
+    </div>
+    <div class="frame-device">
+      <section class="frame" id="s06" aria-label="S06 · Fix" data-frame="S06">
+        <div class="frame-inner">
+          <div class="split split-reverse">
+            <div class="split-text">
+              <h2 class="title-section">Then it builds a proposed fix.</h2>
+              <p class="text-body">For what it found, CR Scan AI builds a proposed fix.</p>
+            </div>
+            <div class="split-visual">
+              <div class="field field-2">
+                <figure class="card" role="img" aria-label="Illustration of one proposed fix shown on a card.">
+                  <span class="pill">Illustration</span>
+                  <span class="card card-inner card-small">
+                    <span class="bars">
+                      <span class="bar bar-mid"></span>
+                      <span class="bar bar-long"></span>
+                      <span class="bar bar-short"></span>
+                    </span>
+                  </span>
+                  <span class="bars">
+                    <span class="bar bar-long"></span>
+                    <span class="bar bar-mid"></span>
+                  </span>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="frame-block">
+    <div class="frame-legend">
+      <p class="frame-label">S12 · Scan and fix</p>
+      <p class="frame-meta">Variant P01·B · key sections K2 and K3 in one · field F3 · no button</p>
+      <p class="frame-supply"><strong>Proof only · To supply:</strong> the finding and its proposed fix shown on a store. No number.</p>
+    </div>
+    <div class="frame-device">
+      <section class="frame" id="s12" aria-label="S12 · Scan and fix" data-frame="S12">
+        <div class="frame-inner">
+          <div class="split">
+            <div class="split-text">
+              <h2 class="title-section">A scan, then a proposed fix.</h2>
+              <p class="text-body">On your store, CR Scan AI finds what may be stopping shoppers. For what it found, it builds a proposed fix.</p>
+            </div>
+            <div class="split-visual">
+              <div class="field field-3">
+                <figure class="card" role="img" aria-label="Illustration of a finding and its proposed fix shown on a store.">
+                  <span class="pill">Illustration</span>
+                  <span class="bars">
+                    <span class="bar bar-mid"></span>
+                    <span class="bar bar-long"></span>
+                  </span>
+                  <span class="card card-inner card-small">
+                    <span class="bars">
+                      <span class="bar bar-mid"></span>
+                      <span class="bar bar-long"></span>
+                      <span class="bar bar-short"></span>
+                    </span>
+                  </span>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- S07 -->
+  <div class="frame-block">
+    <div class="frame-legend">
+      <p class="frame-label">S07 · Approve</p>
+      <p class="frame-meta">Shared by both variants · key section K4 · field F3 · no button on the page: the approve control is a placeholder region inside the future illustration · the caption sits under the illustration</p>
+      <p class="frame-supply"><strong>Proof only · To supply:</strong> one small card with a proposed change and a single approve control. No number, no real store domain.</p>
+    </div>
+    <div class="frame-device">
+      <section class="frame" id="s07" aria-label="S07 · Approve" data-frame="S07">
+        <div class="frame-inner">
+          <div class="split">
+            <div class="split-text">
+              <h2 class="title-section">A proposal, then your decision.</h2>
+              <p class="text-body">The AI proposes. You decide.</p>
+            </div>
+            <div class="split-visual">
+              <div class="field field-3">
+                <figure class="card" role="img" aria-label="Illustration of a proposed change on a card with one approve button.">
+                  <span class="pill">Illustration</span>
+                  <span class="card card-inner card-small">
+                    <span class="bars">
+                      <span class="bar bar-mid"></span>
+                      <span class="bar bar-long"></span>
+                    </span>
+                  </span>
+                  <span class="region">Approve control: part of the illustration</span>
+                </figure>
+              </div>
+              <p class="text-caption visual-caption">You approve every change</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- S09 -->
+  <div class="frame-block">
+    <div class="frame-legend">
+      <p class="frame-label">S09 · Closing call to action</p>
+      <p class="frame-meta">Shared by both variants · key section K5 · plain page, no field, no illustration · the support line shown is the A line; variant B leaves it empty</p>
+    </div>
+    <div class="frame-device">
+      <section class="frame" id="s09" aria-label="S09 · Closing call to action" data-frame="S09">
+        <div class="frame-inner">
+          <div class="closing-stack">
+            <h2 class="title-section">Start with ShopBase 2.0.</h2>
+            <p class="text-body">ShopBase 2.0 is one product.</p>
+            <div class="button-row">
+              <a class="btn btn-primary" href="https://accounts.shopbase.com/sign-up">Get started for free <span class="icon" aria-hidden="true"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg></span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Measured report: outside the frames, no script -->
+  <div class="proof-intro-wrap">
+    <section class="legend-card">
+      <details class="report">
+        <summary>Measured report and open placeholders</summary>
+        <div class="report-body">
+<p>Measured with headless Chrome on a separate test copy that adds a measuring script (this file has no script). Widths: 1440 and 375. Section estimates come from the Step 12 plan; measured values are rendered frame heights in px.</p>
+<div class="report-scroll"><table class="report-table"><thead><tr><th>Frame</th><th>Estimate desktop</th><th>Estimate mobile</th><th>Measured desktop</th><th>Measured mobile</th><th>Boxes (cap 4)</th><th>Primary CTAs (cap 1)</th></tr></thead><tbody>
+<tr><td>S03 · Hero A</td><td>900</td><td>1500</td><td>949</td><td>794</td><td>1 card + 1 field (2)</td><td>1 primary + 1 secondary</td></tr>
+<tr><td>S10 · Hero B</td><td>900</td><td>1500</td><td>1076</td><td>936</td><td>2 cards + 1 field (3)</td><td>1 primary + 1 secondary</td></tr>
+<tr><td>S05 · Scan</td><td>800</td><td>1100</td><td>608</td><td>566</td><td>1 card + 1 field (2)</td><td>0</td></tr>
+<tr><td>S06 · Fix</td><td>800</td><td>1100</td><td>629</td><td>557</td><td>2 cards + 1 field (3)</td><td>0</td></tr>
+<tr><td>S12 · Scan and fix</td><td>800</td><td>1100</td><td>629</td><td>582</td><td>2 cards + 1 field (3)</td><td>0</td></tr>
+<tr><td>S07 · Approve</td><td>800</td><td>1100</td><td>653</td><td>606</td><td>2 cards + 1 region + 1 field (4)</td><td>0 (approve control is a placeholder region)</td></tr>
+<tr><td>S09 · Closing call to action</td><td>500</td><td>600</td><td>386</td><td>299</td><td>none</td><td>1 primary</td></tr>
+</tbody></table></div>
+<p>Hex outside the root block: 0. Inline style attributes: 0. Scripts: 0. Lazy-loaded images: 0. Horizontal overflow at 375: none. Distinct colour pairs used: 12, all pass: 7 text pairs (5 inside the frames, 2 on the grey proof canvas; lowest 4.69, white on the primary button) and 5 UI pairs (lowest 3.48, the secondary-button and pill borders on white; focus ring 8.31). No text sits on a field stop. Distinct font sizes rendered: 6 of 7 scale steps at 1440, 5 at 375. Re-measured at review after two changes: the S07 caption now sits under the illustration, and the "To supply" notes moved from the frames into the legends.</p>
+<p class="report-heading">Open placeholders</p>
+<ul><li>Illustration 1 in S03: scan card crop, user-supplied.</li><li>Illustration in S10: store with scan card, user-supplied.</li><li>Illustration 1 in S05: full scan card, user-supplied.</li><li>Illustration 2 in S06: one proposed fix, user-supplied.</li><li>Illustration in S12: finding and proposed fix, user-supplied.</li><li>Illustration 3 in S07: proposed change with one approve control, user-supplied. The approve control is a labelled region, not live UI.</li><li>Sign-up link and the on-page anchors are assumptions from the copy file.</li></ul>
+        </div>
+      </details>
+    </section>
+  </div>
+
+</div>
+</body>
+</html>

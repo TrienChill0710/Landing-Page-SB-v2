@@ -1,0 +1,175 @@
+{
+  "$description": "ShopBase 2.0 Home (P01) semantic tokens, light mode only (frame lock). Every $value is an alias to 1-primitive.json; no raw values. Where the proof re-points a value on mobile (max-width 767px), a '-mobile' token holds the mobile value. Typography roles use the DTCG composite shape; letterSpacing is omitted where the proof sets none. NON-STANDARD types, kept on purpose: field.angle is typed dimension (DTCG has no angle type) and layout.split.* is typed string (not a DTCG type); see 1-primitive.json.",
+  "color": {
+    "$type": "color",
+    "action": {
+      "primary":       { "$value": "{color.blue.600}", "$description": "Get started buttons and the one approve control. Never a section background, field or body text." },
+      "primary-hover": { "$value": "{color.blue.700}" }
+    },
+    "text": {
+      "title":      { "$value": "{color.neutral.900}", "$description": "Headlines, secondary-button text." },
+      "body":       { "$value": "{color.neutral.800}" },
+      "muted":      { "$value": "{color.neutral.700}", "$description": "Captions. Only on page, panel, F1, F2 (never on F3)." },
+      "on-primary": { "$value": "{color.white}" },
+      "link":       { "$value": "{color.blue.700}", "$description": "Same colour as primary hover. Never on F3." }
+    },
+    "surface": {
+      "page":   { "$value": "{color.white}" },
+      "panel":  { "$value": "{color.neutral.50}" },
+      "accent": { "$value": "{color.sky.100}", "$description": "Accent tint: a found issue, a proposed fix, the approval highlight (title text on it; body, link and the field border also pass). Never muted text or the UI border color.border.default on it (palette: those only on page, panel, F1, F2 / page, panel, F1)." },
+      "canvas": { "$value": "{color.neutral.200}", "$description": "PROOF ONLY: the grey canvas around the section frames. Not a page surface." }
+    },
+    "accent": {
+      "sky": { "$value": "{color.sky.400}", "$description": "The logo's sky. Small markers; never text." }
+    },
+    "border": {
+      "default": { "$value": "{color.neutral.500}", "$description": "UI outlines (3:1). On page, panel and F1 only." },
+      "field":   { "$value": "{color.neutral.600}", "$description": "UI outline where the edge touches F1 or F2. Not on F3." },
+      "divider": { "$value": "{color.neutral.200}", "$description": "Decorative hairline; carries no UI meaning." }
+    },
+    "focus": {
+      "ring": { "$value": "{color.blue.800}" }
+    },
+    "status": {
+      "success": { "text": { "$value": "{color.green.700}", "$description": "Only a state the seller caused (approved)." }, "tint": { "$value": "{color.green.50}" } },
+      "warning": { "text": { "$value": "{color.amber.700}", "$description": "\"Needs your decision\"." }, "tint": { "$value": "{color.amber.50}" } },
+      "danger":  { "text": { "$value": "{color.red.700}", "$description": "Errors and destructive actions only." }, "tint": { "$value": "{color.red.50}" } }
+    },
+    "field": {
+      "1": { "stop-1": { "$value": "{color.sky.50}" },  "stop-2": { "$value": "{color.blue.50}" } },
+      "2": { "stop-1": { "$value": "{color.sky.200}" }, "stop-2": { "$value": "{color.blue.100}" } },
+      "3": { "stop-1": { "$value": "{color.sky.300}" }, "stop-2": { "$value": "{color.blue.300}" } }
+    }
+  },
+  "field": {
+    "angle": { "$type": "dimension", "$value": "{angle.135}", "$description": "Linear gradient angle for all three soft fields. Never on text." }
+  },
+  "space": {
+    "$type": "dimension",
+    "section":            { "$value": "{space.7}", "$description": "Vertical gap between sections; the top step, used nowhere else." },
+    "section-mobile":     { "$value": "{space.6}" },
+    "gutter":             { "$value": "{space.5}" },
+    "gutter-mobile":      { "$value": "{space.4}" },
+    "field-pad":          { "$value": "{space.6}", "$description": "Padding inside a soft field." },
+    "field-pad-mobile":   { "$value": "{space.3}" },
+    "card-pad":           { "$value": "{space.5}" },
+    "card-pad-mobile":    { "$value": "{space.4}" },
+    "stack": {
+      "xs":  { "$value": "{space.1}" },
+      "sm":  { "$value": "{space.2}" },
+      "md":  { "$value": "{space.3}" },
+      "lg":  { "$value": "{space.4}" },
+      "xl":  { "$value": "{space.5}" },
+      "2xl": { "$value": "{space.6}" }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "field":         { "$value": "{radius.32}", "$description": "Large container behind a card." },
+    "card":          { "$value": "{radius.24}" },
+    "inner":         { "$value": "{radius.16}", "$description": "Inner card inside a card." },
+    "control":       { "$value": "{radius.12}", "$description": "Controls and chips." },
+    "button":        { "$value": "{radius.12}" },
+    "pill":          { "$value": "{radius.992}" },
+    "field-mobile":  { "$value": "{radius.16}", "$description": "Proof: --radius-field: var(--radius-card) inside the mobile block where --radius-card is also re-pointed to --radius-inner, so the computed value is 1rem. Rendered at 375 (headless Chrome, Step 19 review): field, card and inner card all have a 16px corner, so the 'inner smaller than parent' radius family does not hold on mobile. Token = what the proof renders; if a 1.5rem mobile field was meant, change it at Step 20/21." },
+    "card-mobile":   { "$value": "{radius.16}" }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "card":   { "$value": "{shadow.soft}",   "$description": "White card on a soft field. Inner cards use none." },
+    "device": { "$value": "{shadow.lifted}", "$description": "PROOF wrapper shadow; not part of the page." }
+  },
+  "border": {
+    "width": {
+      "$type": "dimension",
+      "default": { "$value": "{border.width.1}" },
+      "strong":  { "$value": "{border.width.2}", "$description": "Dashed region outline." }
+    }
+  },
+  "focus": {
+    "ring": {
+      "$type": "dimension",
+      "width":  { "$value": "{outline.width}" },
+      "offset": { "$value": "{outline.offset}" }
+    }
+  },
+  "font": {
+    "family": { "base": { "$type": "fontFamily", "$value": "{font.family.sans}" } }
+  },
+  "typography": {
+    "$type": "typography",
+    "hero-headline": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.5}", "fontWeight": "{font.weight.semibold}", "lineHeight": "{font.line-height.tight}", "letterSpacing": "{font.letter-spacing.tight}" }
+    },
+    "hero-headline-mobile": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.3}", "fontWeight": "{font.weight.semibold}", "lineHeight": "{font.line-height.tight}", "letterSpacing": "{font.letter-spacing.tight}" }
+    },
+    "section-headline": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.4}", "fontWeight": "{font.weight.semibold}", "lineHeight": "{font.line-height.snug}", "letterSpacing": "{font.letter-spacing.tight}" }
+    },
+    "section-headline-mobile": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.2}", "fontWeight": "{font.weight.semibold}", "lineHeight": "{font.line-height.snug}", "letterSpacing": "{font.letter-spacing.tight}" }
+    },
+    "lead": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.1}", "fontWeight": "{font.weight.regular}", "lineHeight": "{font.line-height.relaxed}" }
+    },
+    "lead-mobile": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.0}", "fontWeight": "{font.weight.regular}", "lineHeight": "{font.line-height.relaxed}" }
+    },
+    "paragraph": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.1}", "fontWeight": "{font.weight.regular}", "lineHeight": "{font.line-height.relaxed}" },
+      "$description": "Section paragraph text (the proof's .text-body). Same values as typography.lead because the proof's .text-body uses --size-lead (1.25rem), not --size-body (1rem). Named 'paragraph', not 'body', so it is not confused with the proof's --size-body, which maps to typography.base."
+    },
+    "paragraph-mobile": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.0}", "fontWeight": "{font.weight.regular}", "lineHeight": "{font.line-height.relaxed}" }
+    },
+    "base": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.0}", "fontWeight": "{font.weight.regular}", "lineHeight": "{font.line-height.relaxed}" },
+      "$description": "Document base text and button label size (the proof's --size-body, 1rem). Not re-pointed on mobile."
+    },
+    "caption": {
+      "$value": { "fontFamily": "{font.family.sans}", "fontSize": "{font.size.n1}", "fontWeight": "{font.weight.medium}", "lineHeight": "{font.line-height.relaxed}", "letterSpacing": "{font.letter-spacing.wide}" }
+    }
+  },
+  "layout": {
+    "$type": "dimension",
+    "container": {
+      "base":    { "$value": "{size.1200}", "$description": "Declared default (75rem). In the proof it never applies: the two media queries below cover every width." },
+      "compact": { "$value": "{size.1088}", "$description": "Max content width at viewport max-width 1439px." },
+      "wide":    { "$value": "{size.1280}", "$description": "Max content width at viewport min-width 1440px." }
+    },
+    "page": {
+      "frame-max": { "$value": "{size.1440}", "$description": "PROOF wrapper width (the 1440 desktop frame). Not a decided page max width." }
+    },
+    "measure": {
+      "text": { "$value": "{size.608}", "$description": "Max width of lead and body text." },
+      "hero": { "$value": "{size.864}", "$description": "Max width of the hero headline." }
+    },
+    "card": {
+      "max-width":        { "$value": "{size.736}" },
+      "min-height":       { "$value": "{size.288}" },
+      "min-height-mobile": { "$value": "{size.240}" }
+    },
+    "split": {
+      "columns":         { "$type": "string", "$value": "{grid.columns.5-7}", "$description": "Text left, visual right." },
+      "columns-reverse": { "$type": "string", "$value": "{grid.columns.7-5}", "$description": "Visual left, text right." }
+    },
+    "logo": {
+      "min-width":        { "$value": "{size.120}", "$description": "Minimum full-logo width (identity proposal) and the width shown in the proof legend." },
+      "clear-space-ratio": { "$type": "number", "$value": "{ratio.0945}", "$description": "Clear space = logo width x this ratio, all four sides." }
+    },
+    "breakpoint": {
+      "mobile-max":  { "$value": "{breakpoint.767}" },
+      "compact-max": { "$value": "{breakpoint.1439}" },
+      "wide-min":    { "$value": "{breakpoint.1440}" }
+    },
+    "viewport": {
+      "mobile-design": { "$value": "{viewport.375}" }
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "control-height": { "$value": "{size.52}", "$description": "Minimum button height." },
+    "icon":           { "$value": "{size.20}", "$description": "Lucide icon size." }
+  }
+}
